@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eutron</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            min-height: 100vh;
+            cursor: default;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+            outline: 2px solid #001f3f;
+            padding: 30px;
+            color: white;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #ff8000;
+            text-align: center;
+            font-size: 3em;
+            text-shadow: 0 0 10px rgba(255, 128, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #000000, #800000);
+            border: 2px solid #001f3f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 50%;
+            filter: blur(10px);
+            top: var(--y);
+            left: var(--x);
+            transform: translate(-50%, -50%);
+        }
+
+        .terms-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #001f3f;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .click-effect {
+            position: fixed;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(0, 31, 63, 0.5) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Eutron</h1>
+        <div class="content">
+            <p>Eutron is an innovative program that revolutionizes the Roblox experience by enhancing performance, adding advanced features, and providing unparalleled customization options. Our solution transforms how you interact with the Roblox platform while maintaining complete security and compliance.</p>
+            <button>Download</button>
+            <button>Features</button>
+            <button>Support</button>
+        </div>
+    </div>
+
+    <div class="terms-modal" id="termsModal">
+        <h2>Terms of Service</h2>
+        <p>Do you agree to Eutron's terms of service of distributing and using local data?</p>
+        <button onclick="closeTerms()">Agree</button>
+    </div>
+
+    <script>
+        // Terms modal handling
+        window.onload = function() {
+            document.getElementById('termsModal').style.display = 'block';
+        }
+
+        function closeTerms() {
+            document.getElementById('termsModal').style.display = 'none';
+        }
+
+        // Button hover effect
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousemove', e => {
+                const rect = button.getBoundingClientRect();
+                button.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                button.style.setProperty('--y', `${e.clientY - rect.top}px`);
+            });
+        });
+
+        // Background click effect
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.container') && !e.target.closest('.terms-modal')) {
+                const effect = document.createElement('div');
+                effect.className = 'click-effect';
+                effect.style.left = `${e.clientX}px`;
+                effect.style.top = `${e.clientY}px`;
+                effect.style.width = '0';
+                effect.style.height = '0';
+                
+                document.body.appendChild(effect);
+                
+                let size = 0;
+                const animate = () => {
+                    size += 10;
+                    effect.style.width = `${size}px`;
+                    effect.style.height = `${size}px`;
+                    if (size < 100) requestAnimationFrame(animate);
+                    else effect.remove();
+                };
+                animate();
+            }
+        });
+    </script>
+</body>
+</html>

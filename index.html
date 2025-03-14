@@ -31,7 +31,7 @@
             border: 2px solid #001f3f;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 0 30px rgba(128, 128, 128, 0.7); /* Grey drop shadow */
+            box-shadow: 0 0 30px rgba(128, 128, 128, 0.4); /* More faded grey drop shadow */
             max-width: 800px;
             margin: 20px;
             max-height: 90vh;
@@ -82,9 +82,9 @@
             position: absolute;
             top: var(--y, 50%);
             left: var(--x, 50%);
-            width: 100%;
-            height: 200%; /* Taller highlight */
-            background: radial-gradient(circle closest-side, rgba(0, 170, 255, 0.6), transparent);
+            width: 50%; /* Smaller width */
+            height: 200%; /* Full height */
+            background: radial-gradient(circle closest-side, rgba(128, 0, 0, 0.6), transparent); /* Darker maroon vibe */
             transform: translate(-50%, -50%) scale(0);
             transition: transform 0.3s ease, opacity 0.3s ease;
             opacity: 0;
@@ -115,7 +115,7 @@
             border: 2px solid #001f3f;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 0 30px rgba(128, 128, 128, 0.7); /* Grey drop shadow */
+            box-shadow: 0 0 30px rgba(128, 128, 128, 0.4); /* More faded grey drop shadow */
             text-align: center;
             max-width: 500px;
             margin: 20px;
